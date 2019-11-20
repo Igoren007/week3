@@ -47,4 +47,47 @@ $(document).ready(function(){
         $('.overlay, #order').fadeIn('slow');
       })
     });
+
+    function validateForms(form) {
+      $(form).validate({
+        rules:{
+          name: "required",
+          phone: "required",
+          email: {
+            required: true,
+            email: true
+          }
+        },
+        messages: {
+          name: "Пожалуйста, введите свое имя",
+          phone: "Пожалуйста, введите свой телефон",
+          email: {
+            required: "Пожалуйста, введите свою почту",
+            email: "Неправильная почта"
+          }
+        }
+      });
+    };
+
+    validateForms('#consultation-form');
+    validateForms('#consultation form');
+    validateForms('#order form');
+
+    $('input[name=phone]').mask("+7 (999) 999-99-99")
+
+    //Smooth scroll and pageup
+    $(window).scroll(function(){
+      if ($(this).scrollTop() > 1600){
+        $('.pageup').fadeIn();
+      }
+      else {
+        $('.pageup').fadeOut();
+      }
+    });
+
+    $("a[href^='#']").click(function(){
+      const _href = $(this).attr("href");
+      $("html, body").animate({scrollTop: $(_href).offset().top+"px"});
+      return false;
+    });
   });
